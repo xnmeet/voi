@@ -56,4 +56,12 @@ jobs:
           files: |
             voi-*.bobplugin
             appcast.json
-          generate_release_notes: true 
+          generate_release_notes: true
+
+      - name: Commit and Push appcast.json
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add appcast.json
+          git commit -m "chore: update appcast.json for version ${{ steps.get_latest_tag.outputs.version }}"
+          git push 

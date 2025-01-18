@@ -2,6 +2,15 @@
 
 基于 Kokoro 模型的本地部署 TTS 服务器。
 
+## 开源项目依赖
+
+本项目基于以下开源项目：
+
+1. [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) - Kokoro TTS 的 ONNX 运行时实现
+2. [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) - Kokoro TTS 模型
+
+感谢这些优秀的开源项目的贡献！
+
 ## 系统要求
 
 - Python 3.8+
