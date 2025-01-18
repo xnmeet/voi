@@ -1,0 +1,19 @@
+FROM continuumio/miniconda3:latest
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libsndfile1 \
+    ffmpeg \
+    portaudio19-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY environment.yml .
+RUN conda env create -f environment.yml
+
+COPY . .
+
+SHELL ["conda", "run", "-n", "tts-env", "/bin/bash", "-c"]
+
+CMD ["conda", "run", "--no-capture-output", "-n", "tts-env", "uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"] 

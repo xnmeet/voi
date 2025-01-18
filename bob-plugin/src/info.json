@@ -1,0 +1,38 @@
+{
+  "identifier": "com.meet.bob-plugin-voi",
+  "version": "0.0.1",
+  "category": "tts",
+  "name": "Kokoro 语音",
+  "summary": "使用 Kokoro 本地部署模型作为语音合成服务",
+  "icon": "icon.png",
+  "author": "xnmeet <xxnmeet@gmail.com>",
+  "homepage": "https://github.com/xnmeet/voi",
+  "appcast": "https://raw.githubusercontent.com/xnmeet/voi/main/appcast.json",
+  "minBobVersion": "1.6.0",
+  "options": [
+    {
+      "identifier": "baseUrl",
+      "type": "text",
+      "title": "自定义接口完整地址"
+    },
+    {
+      "identifier": "voice",
+      "type": "menu",
+      "title": "声色",
+      "defaultValue": "af",
+      "menuValues": [
+        { "title": "af", "value": "af" },
+        { "title": "af_bella", "value": "af_bella" },
+        { "title": "af_nicole", "value": "af_nicole" },
+        { "title": "af_sarah", "value": "af_sarah" },
+        { "title": "af_sky", "value": "af_sky" },
+        { "title": "am_adam", "value": "am_adam" },
+        { "title": "am_michael", "value": "am_michael" },
+        { "title": "bf_emma", "value": "bf_emma" },
+        { "title": "bf_isabella", "value": "bf_isabella" },
+        { "title": "bm_george", "value": "bm_george" },
+        { "title": "bm_lewis", "value": "bm_lewis" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+name: tts-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - onnxruntime>=1.20.1
+  - pip:
+    - fastapi>=0.100.0
+    - uvicorn[standard]>=0.23.0
+    - sounddevice>=0.4.6
+    - numpy>=1.24.0
+    - pydub>=0.0.25
+    - python-multipart>=0.0.6
+    - kokoro-onnx>=0.3.3 
