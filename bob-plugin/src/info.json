@@ -33,6 +33,22 @@
         { "title": "bm_george", "value": "bm_george" },
         { "title": "bm_lewis", "value": "bm_lewis" }
       ]
+    },
+    {
+      "identifier": "speed",
+      "type": "menu",
+      "title": "语速",
+      "defaultValue": "1.0",
+      "menuValues": [
+        { "title": "0.25x", "value": "0.25" },
+        { "title": "0.5x", "value": "0.5" },
+        { "title": "0.75x", "value": "0.75" },
+        { "title": "1.0x", "value": "1.0" },
+        { "title": "1.25x", "value": "1.25" },
+        { "title": "1.5x", "value": "1.5" },
+        { "title": "1.75x", "value": "1.75" },
+        { "title": "2.0x", "value": "2.0" }
+      ]
     }
   ]
 }

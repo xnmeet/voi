@@ -23,7 +23,7 @@ function tts(query, completion) {
       body: {
         text: originText,
         voice: $option.voice,
-        speed: 1,
+        speed: parseFloat($option.speed),
         stream: false,
         format: 'base64'
       },
