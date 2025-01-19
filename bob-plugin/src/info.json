@@ -1,6 +1,6 @@
 {
   "identifier": "com.meet.bob-plugin-voi",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "category": "tts",
   "name": "Kokoro 语音",
   "summary": "使用 Kokoro 本地部署模型作为语音合成服务",
