@@ -15,6 +15,16 @@ def calculate_sha256(filename):
     return sha256_hash.hexdigest()
 
 def create_plugin_package(version):
+    # Update version in info.json first
+    info_json_path = "bob-plugin/info.json"
+    with open(info_json_path, 'r') as f:
+        info = json.load(f)
+    
+    info['version'] = version
+    
+    with open(info_json_path, 'w') as f:
+        json.dump(info, f, indent=2)
+
     # Create zip file from src directory
     src_dir = "bob-plugin"
     output_name = f"voi-{version}"
