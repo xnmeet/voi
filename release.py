@@ -8,11 +8,9 @@ import argparse
 from datetime import datetime
 
 def calculate_sha256(filename):
-    sha256_hash = hashlib.sha256()
+    # Read file in chunks and calculate SHA256
     with open(filename, "rb") as f:
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
-    return sha256_hash.hexdigest()
+        return hashlib.file_digest(f, "sha256").hexdigest()
 
 def create_plugin_package(version):
     # Update version in info.json first
@@ -26,7 +24,7 @@ def create_plugin_package(version):
         json.dump(info, f, indent=2, ensure_ascii=False)
 
     # Create zip file from src directory
-    src_dir = "bob-plugin"
+    src_dir = "bob-plugin/src"
     output_name = f"voi-{version}"
     
     # Create zip archive
