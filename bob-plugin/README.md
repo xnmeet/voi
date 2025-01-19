@@ -21,6 +21,8 @@
 - 需要有运行中的 Kokoro TTS 服务器
 
 ## ⚙️ 插件配置
+<img width="740" alt="image" src="https://github.com/user-attachments/assets/dfdabe67-21a8-47c0-8569-35d75a2f062c" />
+
 
 ### 必需配置
 
