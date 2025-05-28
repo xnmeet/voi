@@ -60,6 +60,174 @@ docker run -p 8000:8000 kokoro-tts-conda
 
 详细说明请参考 [插件文档](bob-plugin/README.md)
 
+## 📡 API 调用示例
+
+### 基本调用
+
+TTS 服务器提供了简单易用的 REST API，以下是各种调用方式的示例：
+
+#### 配置在 Bob 插件
+
+自定义接口完整地址：http://localhost:55000/text-to-speech
+
+> 前面的域名和端口替换为你实际起的服务对应域名和端口
+
+#### curl 命令行调用
+
+```bash
+# 基本调用（使用默认声音）
+curl -X POST http://localhost:8000/text-to-speech \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello, this is a test message"}' \
+  --output audio.mp3
+
+# 指定声音和语速
+curl -X POST http://localhost:8000/text-to-speech \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Hello, this is a test with custom voice",
+    "voice": "af_bella",
+    "speed": 1.2,
+    "format": "wav"
+  }' \
+  --output audio.wav
+
+# 获取 Base64 编码的音频数据
+curl -X POST http://localhost:8000/text-to-speech \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Hello world",
+    "voice": "af_heart",
+    "format": "base64"
+  }' | jq -r '.audio_data' | base64 -d > audio.mp3
+```
+
+#### Python 调用示例
+
+```python
+import requests
+import base64
+
+# 基本调用
+def text_to_speech_basic():
+    url = "http://localhost:8000/text-to-speech"
+    data = {
+        "text": "你好，这是一个测试消息",
+        "voice": "af_heart",
+        "speed": 1.0,
+        "format": "mp3"
+    }
+
+    response = requests.post(url, json=data)
+
+    if response.status_code == 200:
+        with open("output.mp3", "wb") as f:
+            f.write(response.content)
+        print("音频文件已保存为 output.mp3")
+    else:
+        print(f"请求失败: {response.status_code}")
+
+# 获取 Base64 编码的音频
+def text_to_speech_base64():
+    url = "http://localhost:8000/text-to-speech"
+    data = {
+        "text": "这是 Base64 编码示例",
+        "voice": "af_bella",
+        "format": "base64"
+    }
+
+    response = requests.post(url, json=data)
+
+    if response.status_code == 200:
+        result = response.json()
+        audio_data = base64.b64decode(result["audio_data"])
+
+        with open("output_base64.mp3", "wb") as f:
+            f.write(audio_data)
+        print("Base64 音频文件已保存")
+    else:
+        print(f"请求失败: {response.status_code}")
+
+# 调用函数
+text_to_speech_basic()
+text_to_speech_base64()
+```
+
+#### JavaScript 调用示例
+
+```javascript
+// 基本调用
+async function textToSpeech() {
+  const response = await fetch('http://localhost:8000/text-to-speech', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      text: 'Hello from JavaScript!',
+      voice: 'af_heart',
+      speed: 1.0,
+      format: 'mp3'
+    })
+  });
+
+  if (response.ok) {
+    const audioBlob = await response.blob();
+    const audioUrl = URL.createObjectURL(audioBlob);
+
+    // 创建音频元素并播放
+    const audio = new Audio(audioUrl);
+    audio.play();
+  } else {
+    console.error('TTS 请求失败:', response.status);
+  }
+}
+
+// Base64 格式调用
+async function textToSpeechBase64() {
+  const response = await fetch('http://localhost:8000/text-to-speech', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      text: 'Base64 格式示例',
+      voice: 'af_bella',
+      format: 'base64'
+    })
+  });
+
+  if (response.ok) {
+    const result = await response.json();
+    const audioData = 'data:audio/mp3;base64,' + result.audio_data;
+
+    // 创建音频元素并播放
+    const audio = new Audio(audioData);
+    audio.play();
+  }
+}
+```
+
+### 可用参数说明
+
+| 参数     | 类型    | 默认值     | 说明                         |
+| -------- | ------- | ---------- | ---------------------------- |
+| `text`   | string  | -          | 要转换的文本内容（必需）     |
+| `voice`  | string  | "af_heart" | 声音选择，详见服务器文档     |
+| `speed`  | float   | 1.0        | 语速调节（0.5-2.0）          |
+| `format` | string  | "mp3"      | 音频格式：wav/mp3/ogg/base64 |
+| `stream` | boolean | true       | 是否使用流式响应             |
+
+### 健康检查
+
+```bash
+# 检查服务器状态
+curl http://localhost:8000/health
+
+# 返回结果
+{"status": "healthy"}
+```
+
 ## 🙏 致谢
 
 本项目使用了以下开源项目：
