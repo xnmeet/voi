@@ -32,10 +32,10 @@
 
 ```bash
 cd server
-# 下载 ONNX 模型文件
-wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/kokoro-v0_19.onnx
-# 下载声音配置文件
-wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/voices.json
+# 下载 ONNX 模型文件 (v1.0)
+wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+# 下载声音配置文件 (v1.0)
+wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
 ```
 
 然后选择以下任一方式部署服务器：

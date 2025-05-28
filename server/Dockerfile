@@ -21,8 +21,8 @@ ENV PIP_NO_CACHE_DIR=1 \
 
 COPY requirements.txt .
 COPY server.py .
-COPY kokoro-v0_19.onnx .
-COPY voices.json .
+COPY kokoro-v1.0.onnx .
+COPY voices-v1.0.bin .
 COPY start.sh .
 
 

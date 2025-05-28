@@ -19,27 +19,51 @@
       "identifier": "voice",
       "type": "menu",
       "title": "声色",
-      "defaultValue": "af",
+      "defaultValue": "af_heart",
       "menuValues": [
         {
-          "title": "af",
-          "value": "af"
+          "title": "af_heart (推荐)",
+          "value": "af_heart"
         },
         {
           "title": "af_bella",
           "value": "af_bella"
         },
         {
-          "title": "af_nicole",
-          "value": "af_nicole"
-        },
-        {
           "title": "af_sarah",
           "value": "af_sarah"
         },
         {
+          "title": "af_nicole",
+          "value": "af_nicole"
+        },
+        {
           "title": "af_sky",
           "value": "af_sky"
+        },
+        {
+          "title": "af_alloy",
+          "value": "af_alloy"
+        },
+        {
+          "title": "af_aoede",
+          "value": "af_aoede"
+        },
+        {
+          "title": "af_jessica",
+          "value": "af_jessica"
+        },
+        {
+          "title": "af_kore",
+          "value": "af_kore"
+        },
+        {
+          "title": "af_nova",
+          "value": "af_nova"
+        },
+        {
+          "title": "af_river",
+          "value": "af_river"
         },
         {
           "title": "am_adam",
@@ -50,6 +74,34 @@
           "value": "am_michael"
         },
         {
+          "title": "am_echo",
+          "value": "am_echo"
+        },
+        {
+          "title": "am_eric",
+          "value": "am_eric"
+        },
+        {
+          "title": "am_fenrir",
+          "value": "am_fenrir"
+        },
+        {
+          "title": "am_liam",
+          "value": "am_liam"
+        },
+        {
+          "title": "am_onyx",
+          "value": "am_onyx"
+        },
+        {
+          "title": "am_puck",
+          "value": "am_puck"
+        },
+        {
+          "title": "am_santa",
+          "value": "am_santa"
+        },
+        {
           "title": "bf_emma",
           "value": "bf_emma"
         },
@@ -58,54 +110,40 @@
           "value": "bf_isabella"
         },
         {
+          "title": "bf_alice",
+          "value": "bf_alice"
+        },
+        {
+          "title": "bf_lily",
+          "value": "bf_lily"
+        },
+        {
           "title": "bm_george",
           "value": "bm_george"
         },
         {
           "title": "bm_lewis",
           "value": "bm_lewis"
+        },
+        {
+          "title": "bm_daniel",
+          "value": "bm_daniel"
+        },
+        {
+          "title": "bm_fable",
+          "value": "bm_fable"
         }
       ]
     },
     {
       "identifier": "speed",
-      "type": "menu",
+      "type": "text",
       "title": "语速",
       "defaultValue": "1.0",
-      "menuValues": [
-        {
-          "title": "0.25x",
-          "value": "0.25"
-        },
-        {
-          "title": "0.5x",
-          "value": "0.5"
-        },
-        {
-          "title": "0.75x",
-          "value": "0.75"
-        },
-        {
-          "title": "1.0x",
-          "value": "1.0"
-        },
-        {
-          "title": "1.25x",
-          "value": "1.25"
-        },
-        {
-          "title": "1.5x",
-          "value": "1.5"
-        },
-        {
-          "title": "1.75x",
-          "value": "1.75"
-        },
-        {
-          "title": "2.0x",
-          "value": "2.0"
-        }
-      ]
+      "textConfig": {
+        "type": "number",
+        "placeholder": "1.0"
+      }
     }
   ]
 }

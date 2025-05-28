@@ -5,6 +5,8 @@ from pydantic import BaseModel
 from enum import Enum
 import sounddevice as sd
 from kokoro_onnx import Kokoro
+from kokoro_onnx.config import SAMPLE_RATE
+import soundfile as sf
 import io
 import wave
 import numpy as np
@@ -25,7 +27,7 @@ async def lifespan(app: FastAPI):
         logger.debug(f"Current working directory: {os.getcwd()}")
         logger.debug(f"Directory contents: {os.listdir('.')}")
         global kokoro
-        kokoro = Kokoro("kokoro-v0_19.onnx", "voices.json")
+        kokoro = Kokoro("kokoro-v1.0.onnx", "voices-v1.0.bin")
         logger.info("Kokoro model loaded successfully")
     except Exception as e:
         logger.error(f"Failed to initialize service: {str(e)}")
@@ -93,43 +95,43 @@ class AudioFormatHandler:
 
 class TTSRequest(BaseModel):
     text: str
-    voice: str = "af"
+    voice: str = "af_heart"
     speed: float = 1.0
     stream: bool = True
     format: AudioFormat = AudioFormat.MP3
 
 async def audio_generator(text: str, voice: str, speed: float, format: AudioFormat):
     try:
-        stream = kokoro.create_stream(
+        # 使用新的 create 方法替代 create_stream
+        samples, sample_rate = kokoro.create(
             text,
             voice=voice,
             speed=speed,
-            lang="en-us",
         )
-
-        async for samples, sample_rate in stream:
-            samples = (samples * 32767).astype(np.int16)
+        
+        # 将音频数据转换为指定格式
+        samples = (samples * 32767).astype(np.int16)
+        
+        wav_buffer = io.BytesIO()
+        with wave.open(wav_buffer, 'wb') as wav_file:
+            wav_file.setnchannels(1)
+            wav_file.setsampwidth(2)
+            wav_file.setframerate(sample_rate)
+            wav_file.writeframes(samples.tobytes())
+        
+        if format == AudioFormat.WAV:
+            wav_buffer.seek(0)
+            yield wav_buffer.read()
+        else:
+            wav_buffer.seek(0)
+            audio_segment = AudioSegment.from_wav(wav_buffer)
+            output_buffer = io.BytesIO()
             
-            wav_buffer = io.BytesIO()
-            with wave.open(wav_buffer, 'wb') as wav_file:
-                wav_file.setnchannels(1)
-                wav_file.setsampwidth(2)
-                wav_file.setframerate(sample_rate)
-                wav_file.writeframes(samples.tobytes())
+            export_settings = AudioFormatHandler.get_export_settings(format)
+            audio_segment.export(output_buffer, **export_settings)
             
-            if format == AudioFormat.WAV:
-                wav_buffer.seek(0)
-                yield wav_buffer.read()
-            else:
-                wav_buffer.seek(0)
-                audio_segment = AudioSegment.from_wav(wav_buffer)
-                output_buffer = io.BytesIO()
-                
-                export_settings = AudioFormatHandler.get_export_settings(format)
-                audio_segment.export(output_buffer, **export_settings)
-                
-                output_buffer.seek(0)
-                yield output_buffer.read()
+            output_buffer.seek(0)
+            yield output_buffer.read()
             
     except Exception as e:
         logger.error(f"Error in audio generation: {str(e)}")

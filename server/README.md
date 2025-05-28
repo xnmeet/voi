@@ -25,11 +25,11 @@
 在启动服务器之前，需要下载模型文件和声音配置文件：
 
 ```bash
-# 下载 ONNX 模型文件
-wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/kokoro-v0_19.onnx
+# 下载 ONNX 模型文件 (v1.0)
+wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
 
-# 下载声音配置文件
-wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/voices.json
+# 下载声音配置文件 (v1.0)
+wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
 ```
 
 将这两个文件放在 `server` 目录下。这些文件由于体积较大（模型文件约 310MB），不包含在代码仓库中。
@@ -114,21 +114,50 @@ docker run -p 8000:8000 kokoro-tts-conda
 
 ### 🎙️ 可用声音列表
 
-```
-🎤 基础声音
-├── af: 默认声音
-├── af_bella: Bella 声音
-├── af_nicole: Nicole 声音
-├── af_sarah: Sarah 声音
-└── af_sky: Sky 声音
+#### 🇺🇸 美式英语女声
 
-👨 男声
+```
+├── af_heart: Heart 声音 (推荐，高质量)
+├── af_bella: Bella 声音 (高质量)
+├── af_sarah: Sarah 声音
+├── af_nicole: Nicole 声音
+├── af_sky: Sky 声音
+├── af_alloy: Alloy 声音
+├── af_aoede: Aoede 声音
+├── af_jessica: Jessica 声音
+├── af_kore: Kore 声音
+├── af_nova: Nova 声音
+└── af_river: River 声音
+```
+
+#### 🇺🇸 美式英语男声
+
+```
 ├── am_adam: Adam 声音
 ├── am_michael: Michael 声音
-├── bm_george: George 声音
-└── bm_lewis: Lewis 声音
+├── am_echo: Echo 声音
+├── am_eric: Eric 声音
+├── am_fenrir: Fenrir 声音
+├── am_liam: Liam 声音
+├── am_onyx: Onyx 声音
+├── am_puck: Puck 声音
+└── am_santa: Santa 声音
+```
 
-👩 女声
+#### 🇬🇧 英式英语女声
+
+```
 ├── bf_emma: Emma 声音
-└── bf_isabella: Isabella 声音
+├── bf_isabella: Isabella 声音
+├── bf_alice: Alice 声音
+└── bf_lily: Lily 声音
+```
+
+#### 🇬🇧 英式英语男声
+
+```
+├── bm_george: George 声音
+├── bm_lewis: Lewis 声音
+├── bm_daniel: Daniel 声音
+└── bm_fable: Fable 声音
 ```
