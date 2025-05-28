@@ -2,6 +2,13 @@
   "identifier": "com.meet.bob-plugin-voi",
   "versions": [
     {
+      "version": "0.0.6",
+      "desc": "auto",
+      "sha256": "c360c056185348f74414670c420265b8826d96aeb439b91b21a400f629a6081b",
+      "url": "https://raw.githubusercontent.com/xnmeet/voi/releases/download/v0.0.6/voi-0.0.6.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
       "version": "0.0.5",
       "desc": "auto",
       "sha256": "e34a498203d3f2f30c7e51c253f43b5d5b2b9ce7f418d35501626ac9aa56fe0e",
